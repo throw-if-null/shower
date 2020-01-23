@@ -1,0 +1,66 @@
+version: '3.7'
+
+# Templates:
+x-base: &base-service-template
+  init: true
+  networks:
+    local:
+
+services:
+
+  portainer:
+    <<: *base-service-template
+    image: portainer/portainer:latest
+    container_name: portainer.ctn
+    command: -p :80
+    ports:
+      - "9000:80"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+
+  sqlserver:
+    <<: *base-service-template
+    image: microsoft/mssql-server-linux:latest
+    container_name: sqlserver.ctn
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=${SQLSERVER_SA_PASSWORD:-Password1!}
+    ports:
+      - "1433:1433"
+    volumes:
+      - mssql_data:/var/opt/mssql/data
+    healthcheck:
+      test: ./opt/mssql-tools/bin/sqlcmd -S sqlserver -U sa -P Password1! -Q "SELECT 1" || exit 1
+      interval: 2s
+      timeout: 2s
+      retries: 3
+      start_period: 3s
+
+  shower:
+    <<: *base-service-template
+    #image: mirzamerdovic/shower:latest
+    container_name: shower.ctn
+    build:
+      context: ./src
+      dockerfile: Dockerfile
+    depends_on:
+      - sqlserver
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./Examples/Data/:/opt/mssql-tools/shower:ro
+    healthcheck:
+      test: ./opt/mssql-tools/bin/sqlcmd -S sqlserver -U sa -P Password1! -Q "SELECT 1" || exit 1
+      interval: 2s
+      timeout: 2s
+      retries: 3
+      start_period: 3s
+
+networks:
+  local:
+    name: local
+
+volumes:
+  portainer_data:
+  mssql_data:
