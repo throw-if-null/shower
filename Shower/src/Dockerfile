@@ -2,8 +2,10 @@ FROM mcr.microsoft.com/mssql-tools
 
 ADD VERSION .
 
-COPY entrypoint.sh ./opt/mssql-tools/entrypoint.sh
+WORKDIR /opt/mssql-tools
 
-RUN chmod +x /opt/mssql-tools/entrypoint.sh
+COPY entrypoint.sh ./entrypoint.sh
 
-ENTRYPOINT ["./opt/mssql-tools/entrypoint.sh"]
+RUN chmod +x entrypoint.sh
+
+ENTRYPOINT ["./entrypoint.sh"]

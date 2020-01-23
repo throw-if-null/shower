@@ -6,3 +6,4 @@ tbrand.sql
 tbrand_jurisdictionProviderGameplayInstance.sql
 tgame.sql
 tgame_aams.sql
+roles.sql
