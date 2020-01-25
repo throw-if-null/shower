@@ -1,6 +1,5 @@
 USE gaming_configuration
 
-  
 Insert Into tprovider ([providerId],[providerName],[integrationType],[gameSessionType],[gameLaunchTypeOrder],[providerParameters],[accountCreationType],[active])
 Values (2,N'NetEntCasino',N'Custom',N'ProviderSession',N'GameLaunchTypeOnly',1,N'Custom',1)
 ,(3,N'NEOGames',N'Custom',N'GameSessionRef',N'TouchFirst',0,N'LocalOnly',1)

@@ -28,10 +28,8 @@ services:
       - SA_PASSWORD=${SQLSERVER_SA_PASSWORD:-Password1!}
     ports:
       - "1433:1433"
-    volumes:
-      - mssql_data:/var/opt/mssql/data
     healthcheck:
-      test: ./bin/sqlcmd -S sqlserver -U sa -P Password1! -Q "SELECT 1" || exit 1
+      test: ./opt/mssql-tools/bin/sqlcmd -S sqlserver -U sa -P Password1! -Q "SELECT 1" || exit 1
       interval: 2s
       timeout: 2s
       retries: 3
@@ -49,9 +47,9 @@ services:
     stdin_open: true
     tty: true
     volumes:
-      - ./Examples/Data/:/opt/mssql-tools/shower:ro
+      - ./Examples/Data/:/opt/mssql-tools/shower
     healthcheck:
-      test: ./opt/mssql-tools/bin/sqlcmd -S sqlserver -U sa -P Password1! -Q "SELECT 1" || exit 1
+      test: ./bin/sqlcmd -S sqlserver -U sa -P Password1! -Q "SELECT 1" || exit 1
       interval: 2s
       timeout: 2s
       retries: 3
@@ -63,4 +61,3 @@ networks:
 
 volumes:
   portainer_data:
-  mssql_data:
