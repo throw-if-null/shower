@@ -15,5 +15,5 @@ jobs:
           name: mirzamerdovic/shower
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-          dockerfile:  ./Shower/src/Dockerfile 
+          dockerfile:  ./src/Dockerfile 
           context: .
