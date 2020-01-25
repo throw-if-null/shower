@@ -10,7 +10,7 @@ All you need to provide is couple of environment variables and a volume that con
 
 ## Environment variables
 * _Username_: the SQL username that will be used for executing scripts
-* _Password_: the adequate password for the provider Usernmae
+* _Password_: the adequate password for the provider Username
 * _Server_: the target SQL server 
 
 ## Where should I put my scripts?
@@ -45,4 +45,4 @@ Thanks to the person that has created the ASCII art :-)
 
 ## TODO:
 * Remove the hard requirements for the names of `playlist` file and the `scripts` folder
-* Add support to seed mulitiple SQL servers at the same time e.g. I have 2 servers that need to be seeded with different data
+* Add support to seed multiple SQL servers at the same time e.g. I have 2 servers that need to be seeded with different data
