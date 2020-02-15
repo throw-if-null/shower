@@ -3,23 +3,23 @@
 main() {
 
     export PATH=$PATH:/opt/mssql-tools/bin
-	
+
     echo "Work directory: $PWD"
-	
+
 	cd shower
 	input="playlist"
 	PLAYLIST=""
-	
+
 	while read line
 	do
 		buildPlaylist $PLAYLIST $line
 	done < "$input"
 
 	echo "Scripts for execution: $PLAYLIST"
-	
+
 	cd scripts
 	echo "WORKDIR: $PWD"
-	
+
     for i in $(echo $PLAYLIST | sed "s/,/ /g")
 	do
 		echo "Start running script: $i"
@@ -28,17 +28,15 @@ main() {
 	done
 
 	outro
-	
-	sleep infinity
 }
 
-buildPlaylist() {	
+buildPlaylist() {
 	if [ -z "$1" ];
 	then
 		PLAYLIST=$2
 	else
 		PLAYLIST=$1,$2
-	fi;  
+	fi;
 }
 outro() {
 	echo "\t\t" '   .--./""---.._             '

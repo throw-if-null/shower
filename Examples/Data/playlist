@@ -1,9 +1,3 @@
 logins.sql
-gaming_configuration.sql
-tprovider.sql
-tproviderGameplayInstance.sql
-tbrand.sql
-tbrand_jurisdictionProviderGameplayInstance.sql
-tgame.sql
-tgame_aams.sql
+rat.sql
 roles.sql
