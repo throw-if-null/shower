@@ -42,6 +42,10 @@ services:
     build:
       context: ./src
       dockerfile: Dockerfile
+    environment:
+      - SERVER_INSTANCE=sqlserver
+      - USER_ID=sa
+      - PASSWORD=Password1!
     depends_on:
       - sqlserver
     stdin_open: true
