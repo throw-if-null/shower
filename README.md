@@ -5,6 +5,11 @@
 # What it is?
 A container base on official [MS SQL Server Tools for Linux](https://hub.docker.com/_/microsoft-mssql-tools) with a purpose of making a simple app that will help you seed your database.
 
+# Motivation
+I wanted to have something light and handy that can run on any OS as long as it has Docker installed.  
+It's nothing special, all this can be done manually, but when it comes to running local or experimental setups that usually means that environment(s) will be created from scrtach multiple times most likely on daily basis, so a possiblity of having the seeding step automated sounded very appealing to me.  
+Since I am and was in that kind of situation I finally made myself sit and build the :shower: a wee utility script that runs in a container and seeds your favorite SQL server instance.
+
 # How it works?
 All you need to provide is couple of environment variables and a volume that contains the scripts.
 NOTE:
@@ -42,9 +47,22 @@ someFolder/
   - roles.sql
 ```
 
-## Credits
+## Example
+An example using docker-compose with minimal amount of configuration:
+```yml
+shower:
+  image: mirzamerdovic/shower:latest
+  environment:
+    - SERVER_INSTANCE=sqlserver
+    - USER_ID=sa
+    - PASSWORD=Password1!
+  volumes:
+    - {some_folder_that_container_playlist_and_scripts}:/opt/mssql-tools/shower
+```
+
+# Credits
 Thanks to the person that has created the ASCII art :-)
 
-## TODO:
+# TODOs:
 * Remove the hard requirements for the names of `playlist` file and the `scripts` folder
 * Add support to seed multiple SQL servers at the same time e.g. I have 2 servers that need to be seeded with different data
