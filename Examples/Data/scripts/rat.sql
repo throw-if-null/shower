@@ -5,8 +5,10 @@ GO
 
 -- Create the new database if it does not exist already
 IF EXISTS (SELECT [name] FROM sys.databases WHERE [name] = N'Rat')
+BEGIN
 	ALTER DATABASE Rat SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
-	DROP DATABASE rat
+    DROP DATABASE Rat
+END
 
 CREATE DATABASE Rat
 GO
@@ -21,7 +23,7 @@ CREATE TABLE [dbo].[Configuration]
 	[Expires] INT NOT NULL DEFAULT(60)
 
 	CONSTRAINT [PK_Configuration_Id] PRIMARY KEY ([Id] ASC),
-	CONSTRAINT [UQ_Configuration_Key] UNIQUE ([Key])
+    CONSTRAINT [UQ_Configuration_Key] UNIQUE ([Key])
 );
 
 GO
