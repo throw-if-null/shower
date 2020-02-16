@@ -7,11 +7,13 @@ A container base on official [MS SQL Server Tools for Linux](https://hub.docker.
 
 # How it works?
 All you need to provide is couple of environment variables and a volume that contains the scripts.
+NOTE:
+:shower: will first health check specified SQL server instance. It will try for 5 times with 5 second pauses between each try. If after 5 tries server is still unreachable :shower: will crash.
 
 ## Environment variables
-* _Username_: the SQL username that will be used for executing scripts
-* _Password_: the adequate password for the provider Username
-* _Server_: the target SQL server 
+* _USER_ID_: the SQL user id that will be used for executing scripts
+* _PASSWORD_: the adequate password for the provider user
+* _SERVER_INSTANCE_: the target SQL server 
 
 ## Where should I put my scripts?
 In order to tell :shower: where to find the scripts and how to execute them two requirements must be met:
